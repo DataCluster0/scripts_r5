@@ -173,9 +173,11 @@ void function OnGunshipDamaged( entity gunship_proxy, var damageInfo )
 		else
 		    damage = max( damage, far )
 	}
-
+	
+	#if DEVELOPER
 	printl( gunship.GetHealth() + " / " +   gunship.GetMaxHealth() + " | " + distance + " = " + damage)
-
+	#endif
+   
 	//Tried to give visual shield indicator, but it doesn't seem to work?
 	DamageInfo_AddCustomDamageType( damageInfo, DF_SHIELD_DAMAGE )
 
