@@ -641,6 +641,7 @@ Scripts:
 	client/objects/cl_goblin_dropship.nut
 	client/objects/cl_spectre.nut
 	client/objects/cl_super_spectre.nut
+	client/objects/cl_phantom_fighter.nut
 	conversation/cl_conversation.gnut
 	conversation/cl_conversation_schedule.gnut
 	pilot/cl_pilot_health_hud.gnut
@@ -860,10 +861,9 @@ Scripts:
 	weapons/mp_weapon_phase_tunnel.nut
 	weapons/mp_weapon_incap_shield.nut
 	weapons/mp_ability_care_package.nut
-
 	weapons/mp_ability_crypto_drone.nut
 	weapons/mp_ability_crypto_drone_emp.nut
-
+	weapons/mp_weapon_gunship_missile.nut
 
 	sh_clientmusic.gnut
 

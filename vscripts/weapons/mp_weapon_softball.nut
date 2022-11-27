@@ -72,7 +72,10 @@ bool function PlantProjectileThatBouncesOffWalls( entity ent, table collisionPar
 	float dot = expect vector( collisionParams.normal ).Dot( <0, 0, 1> )
 
 	var hitent = collisionParams.hitEnt
-    if(IsValid( hitent ) && hitent.IsNPC() || IsValid( hitent ) && hitent.IsPlayer()) {}
+
+    if(IsValid( hitent ) && hitent.IsNPC()
+	    || IsValid( hitent ) && hitent.IsPlayer()
+	    || IsValid( hitent ) && hitent.GetScriptName() == "npc_gunship_hitbox") {}
 	else if ( dot < bounceDot )
 		return false
 

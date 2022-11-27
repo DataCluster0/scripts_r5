@@ -230,7 +230,7 @@ function CommonNPCOnSpawned( entity npc )
 
 		case "npc_gunship":
 			InitMinimapSettings( npc )
-			EmitSoundOnEntity( npc, SOUND_GUNSHIP_HOVER )
+			//EmitSoundOnEntity( npc, SOUND_GUNSHIP_HOVER )
 
 			npc.ai.preventOwnerDamage = true
 			npc.s.rebooting <- null
@@ -238,9 +238,6 @@ function CommonNPCOnSpawned( entity npc )
 
 			npc.kv.crashOnDeath = false
 			//npc.kv.secondaryWeaponName = "mp_weapon_gunship_missile"
-
-			EnableLeeching( npc )
-			npc.SetUsableByGroup( "enemies pilot" )
 
 			thread GunshipThink( npc )
 			break

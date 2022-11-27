@@ -123,8 +123,8 @@ WeaponData
 	"damage_far_value"								"55"
 	"damage_near_distance"							"1500"
 	"damage_far_distance" 							"2000"
-	"damage_near_value_titanarmor"					"300"
-	"damage_far_value_titanarmor" 					"250"
+	"damage_near_value_titanarmor"					"65"
+	"damage_far_value_titanarmor" 					"65"
 	"damage_rodeo" 									"350"
 
    	"damage_very_far_value"							"35"
@@ -376,7 +376,7 @@ WeaponData
 			"ui8_enable"		"1"
 			"bodygroup6_set"	"1"
 		}
-		
+
 	    gold
 	    {
 	    }
@@ -432,7 +432,7 @@ WeaponData
 			"ammo_clip_size"   							"10"
 		}
 	}
-	
+
 	"viewmodel_offset_ads"							"0 0 -0.3"
 
 	"ui1_enable"		"1"

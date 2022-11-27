@@ -8,11 +8,11 @@ npc_pilot_elite
 
 	smartAmmoLockAttachmentName0	CHESTFOCUS
 
-	footstep_type					"grunt"
+	footstep_type					"human"
 
 	title							#NPC_PILOT
-	ui_targetinfo					"ui/targetinfo_npc_basic" [$mp]
-	ui_targetinfo					"ui/targetinfo_npc_basic" [$sp]
+	ui_targetinfo					"ui/targetinfo_npc_simple" [$mp]
+	ui_targetinfo					"ui/targetinfo_npc_simple" [$sp]
 
 	BaseClass						"npc_pilot_elite"
 

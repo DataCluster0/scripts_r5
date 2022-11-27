@@ -98,8 +98,8 @@ WeaponData
 
     "damage_near_value"   							"10"
     "damage_far_value"								"10"
-    "damage_near_value_titanarmor"					"10"
-    "damage_far_value_titanarmor" 					"10"
+    "damage_near_value_titanarmor"					"500"
+    "damage_far_value_titanarmor" 					"500"
 
     "explosion_damage"								"55"
     "explosion_damage_heavy_armor"					"55"
@@ -426,7 +426,7 @@ WeaponData
 
 		pro_screen
 		{
-			"ui8_enable"		"1"			
+			"ui8_enable"		"1"
 			"bodygroup5_set"	"1"
 		}
 

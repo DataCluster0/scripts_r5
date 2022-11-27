@@ -39,7 +39,7 @@ WeaponData
 	//offhand_raise_is_interrupt_resumable            "1"
 
 	// Models
-	"viewmodel"   									"mdl/Weapons/rampart_turret/ptpov_rampart_turret.rmdl"
+	"viewmodel"   									"mdl/weapons/rampart_turret/ptpov_rampart_turret.rmdl"
 	"playermodel" 									"mdl/Weapons/rampart_turret/w_rampart_turret.rmdl"
 	"holster_type"									"rifle"
 
@@ -182,9 +182,9 @@ WeaponData
 	"damage_far_value"								"14"
 	"damage_very_far_value"							"14"
 
-	"damage_near_value_titanarmor"					"20"
-	"damage_far_value_titanarmor" 					"20"
-	"damage_very_far_value_titanarmor" 				"20"
+	"damage_near_value_titanarmor"					"45"
+	"damage_far_value_titanarmor" 					"45"
+	"damage_very_far_value_titanarmor" 				"45"
 	"damage_rodeo" 									"200"
 
 	"damage_near_distance"							"1500"
