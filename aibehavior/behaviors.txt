@@ -10,3 +10,4 @@ behavior_infected
 behavior_marvin
 behavior_prowler
 behavior_pilot_elite
+behavior_drone
