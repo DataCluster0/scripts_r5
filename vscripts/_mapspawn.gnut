@@ -299,6 +299,7 @@ void function CodeCallback_MapSpawn() // original script entry point
 		PrecacheWeapon( $"mp_weapon_epg" )
 		
 		PrecacheWeapon( $"mp_weapon_droneplasma" )//NPC Weapon
+		PrecacheWeapon( $"mp_weapon_dronerocket" )//NPC Weapon
 		
 		PrecacheWeapon( $"melee_bolo_sword" )
 		PrecacheWeapon( $"mp_weapon_bolo_sword_primary" )

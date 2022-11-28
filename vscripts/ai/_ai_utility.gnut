@@ -368,6 +368,20 @@ void function DEV_SpawnPlasmaDroneAtCrosshair()
     drone.GiveWeapon("mp_weapon_droneplasma", WEAPON_INVENTORY_SLOT_ANY)
 }
 
+void function DEV_SpawnRocketDroneAtCrosshair()
+{
+	entity player = GetPlayerArray()[ 0 ]
+
+	vector origin = GetPlayerCrosshairOrigin( player )
+	vector angles = Vector( 0, 0, 0 )
+
+	entity drone = CreateGenericDrone( 99, origin, angles )
+
+	DispatchSpawn( drone )
+    
+    drone.GiveWeapon("mp_weapon_dronerocket", WEAPON_INVENTORY_SLOT_ANY)
+}
+
 void function DEV_SpawnLegendAtCrosshair()
 {
 	entity player = GetPlayerArray()[ 0 ]
