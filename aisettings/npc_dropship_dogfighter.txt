@@ -1,0 +1,8 @@
+#base "npc_dropship.txt"
+npc_dropship_dogfighter
+{
+	title 					#NPC_DROPSHIP_DOGFIGHTER
+	DefaultModelName		"mdl/vehicle/straton_imc_gunship_01.rmdl"
+	DefaultModelName_IMC	"mdl/vehicle/straton_imc_gunship_01.rmdl"
+	DefaultModelName_MIL	"mdl/vehicle/goblin_dropship/goblin_dropship_r2.rmdl"
+}
