@@ -108,43 +108,42 @@ void function GunshipThink( entity gunship )
 
 void function CreateDuckTapeHitBox( entity gunship )
 {
-	if( IsValid( gunship ) )
-	{
-		gunship.kv.solid = 0
+    if( IsValid( gunship ) )
+    {
+        gunship.kv.solid = 0
 
-		entity proxy = CreateEntity( "prop_script" )
-		{
-			proxy.SetValueForModelKey( $"mdl/vehicle/goblin_dropship/goblin_dropship.rmdl" )
-			proxy.SetScriptName("npc_gunship_hitbox")
+        entity proxy = CreateEntity( "prop_script" )
+        {
+            proxy.SetValueForModelKey( gunship.GetModelName() )
+            proxy.SetScriptName("npc_gunship_hitbox")
 
-			proxy.SetAngles( gunship.GetAngles() )
-			proxy.SetOrigin( gunship.GetOrigin() + (gunship.GetForwardVector() * -2))
-			proxy.SetModelScale(0.6)
+            proxy.SetAngles( gunship.GetAngles() )
+            proxy.SetOrigin( gunship.GetOrigin() )
+            //proxy.SetModelScale(0.6)
 
-			proxy.kv.solid = SOLID_VPHYSICS
-			proxy.kv.rendermode = 3
-			proxy.kv.rendercolor = "255 255 255 0"
-			proxy.kv.spawnflags = SF_INFOTARGET_ALWAYS_TRANSMIT_TO_CLIENT
+            proxy.kv.solid = SOLID_VPHYSICS
+            proxy.kv.rendermode = 3
+            proxy.kv.rendercolor = "255 255 255 0"
+            proxy.kv.spawnflags = SF_INFOTARGET_ALWAYS_TRANSMIT_TO_CLIENT
 
-			AddEntityCallback_OnKilled( proxy , OnGunshipHitBoxDeath )
-			AddEntityCallback_OnDamaged( proxy , OnGunshipDamaged )
+            AddEntityCallback_OnKilled( proxy , OnGunshipHitBoxDeath )
+            AddEntityCallback_OnDamaged( proxy , OnGunshipDamaged )
 
-			proxy.SetOwner( gunship )
-			proxy.SetParent( gunship )
-			proxy.SetTitle( gunship.GetTitle() )
+            proxy.SetOwner( gunship )
+            proxy.SetParent( gunship )
 
-		    proxy.SetMaxHealth( gunship.GetMaxHealth() )
-		    proxy.SetHealth( gunship.GetMaxHealth() )
+            proxy.DisableRenderAlways()
+            DispatchSpawn( proxy )
 
-			proxy.SetArmorType( ARMOR_TYPE_HEAVY )
-			proxy.DisableRenderAlways()
+            proxy.SetArmorType( ARMOR_TYPE_HEAVY )
+            proxy.SetTitle( gunship.GetTitle() )
+            proxy.SetMaxHealth( gunship.GetMaxHealth() )
+            proxy.SetHealth( gunship.GetMaxHealth() )
+        }
 
-			DispatchSpawn( proxy )
-		}
-
-		proxy.SetTakeDamageType( DAMAGE_YES )
-		proxy.SetSmartAmmoLockType( eSmartAmmoLockType.smallType )
-	}
+        proxy.SetTakeDamageType( DAMAGE_YES )
+        proxy.SetSmartAmmoLockType( eSmartAmmoLockType.smallType )
+    }
 }
 
 void function OnGunshipDamaged( entity gunship_proxy, var damageInfo )
