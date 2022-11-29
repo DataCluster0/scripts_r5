@@ -309,10 +309,10 @@ void function ClMinimap_Init()
 	InitHUDRui( file.fullmap_legendRui, false )
 	Fullmap_AddRui( file.fullmap_legendRui )
 
-	file.fullmap_challengeBoxRui = RuiCreate( $"ui/minimap_challenge_box.rpak", clGlobal.topoFullscreenFullMap, FULLMAP_RUI_DRAW_LAYER, RUI_SORT_SCREENFADE - 1 )
+	//file.fullmap_challengeBoxRui = RuiCreate( $"ui/minimap_challenge_box.rpak", clGlobal.topoFullscreenFullMap, FULLMAP_RUI_DRAW_LAYER, RUI_SORT_SCREENFADE - 1 )
 	//
-	InitHUDRui( file.fullmap_challengeBoxRui, false )
-	Fullmap_AddRui( file.fullmap_challengeBoxRui )
+	//InitHUDRui( file.fullmap_challengeBoxRui, false )
+	//Fullmap_AddRui( file.fullmap_challengeBoxRui )
 
 	// create unitframe ruis for the fullmap screen
 	// Taking off one of these to save memory. If we ever need to go above a 3 person team, add it back.
@@ -1513,7 +1513,7 @@ void function UpdateFullmapRuiTracks()
 	UISize screenSize        = GetScreenSize()
 	float clampedAspectRatio = GetNearestAspectRatio( screenSize.width, screenSize.height )
 	bool isAspectRatio16x10  = clampedAspectRatio == 1.6
-	RuiSetBool( file.fullmap_challengeBoxRui, "isAspectRatio16x10", isAspectRatio16x10 )
+	//RuiSetBool( file.fullmap_challengeBoxRui, "isAspectRatio16x10", isAspectRatio16x10 )
 
 	// if ( IsLocalClientEHIValid() ) // TODO:
 	// 	UpdateChallengeBoxRows( 5, file.fullmap_challengeBoxRui )
