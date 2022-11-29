@@ -99,15 +99,15 @@ void function LeechStart( float time = -1 )
 	stageDurations.append( time * 0.3 )
 	stageDurations.append( time * 0.2 )
 
-	entity knife = player.p.knife
-	if ( !IsValid( knife ) )
-	{
-		printt( "WARNING: can't start leech- can't find player.p.knife" )
-		return
-	}
+	//entity knife = player.p.knife
+	//if ( !IsValid( knife ) )
+	//{
+	//	printt( "WARNING: can't start leech- can't find player.p.knife" )
+	//	return
+	//}
 
-	thread DataKnife_HackRUIs_Start( knife, time, stageDurations )
-	thread DataKnifeHackProgressSounds( stageDurations )
+	//thread DataKnife_HackRUIs_Start( knife, time, stageDurations )
+	//thread DataKnifeHackProgressSounds( stageDurations )
 }
 
 void function DataKnife_HackRUIs_Start( entity knife, float hackDuration, array<float> stageDurations )
