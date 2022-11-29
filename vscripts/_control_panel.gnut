@@ -229,28 +229,28 @@ void function OnPanelSpawn_Internal( entity panel )
 	#endif
 }
 
-void function ActivePathfinder_HandUSB(entity player)
+void function SetPathfinder_HandUSB( entity player, bool showUSB = false )
 {
 	entity firstPersonProxy = player.GetFirstPersonProxy()
 
-	wait 1
+	if ( showUSB )
+	{
+		wait 1
 
-	int usbIndex = firstPersonProxy.FindBodygroup( "l_hand_usb" )
-	// show the usb
-	if ( firstPersonProxy.GetBodygroupModelIndex( usbIndex ) == 0 )
-		firstPersonProxy.SetBodygroupModelByIndex( usbIndex, 1 )
-}
+		int usbIndex = firstPersonProxy.FindBodygroup( "l_hand_usb" )
+		// show the usb
+		if ( firstPersonProxy.GetBodygroupModelIndex( usbIndex ) == 0 )
+			firstPersonProxy.SetBodygroupModelByIndex( usbIndex, 1 )
+	}
+	else
+	{
+		wait 1
 
-void function DeActivePathfinder_HandUSB(entity player)
-{
-	entity firstPersonProxy = player.GetFirstPersonProxy()
-
-	wait 1
-
-	int usbIndex = firstPersonProxy.FindBodygroup( "l_hand_usb" )
-	// hide the usb
-	if ( firstPersonProxy.GetBodygroupModelIndex( usbIndex ) != 0 )
-		firstPersonProxy.SetBodygroupModelByIndex( usbIndex, 0 )
+		int usbIndex = firstPersonProxy.FindBodygroup( "l_hand_usb" )
+		// hide the usb
+		if ( firstPersonProxy.GetBodygroupModelIndex( usbIndex ) != 0 )
+			firstPersonProxy.SetBodygroupModelByIndex( usbIndex, 0 )
+	}
 }
 
 void function PanelUpdateUsability( entity panel )
@@ -380,7 +380,7 @@ void function PlayerProgramsControlPanel( entity panel, entity player, string ha
 	// need to wait here so that the panel script can start waiting for the PanelReprogrammed signal.
 	WaitFrame()
 	
-	thread ActivePathfinder_HandUSB(player)
+	thread SetPathfinder_HandUSB( player, true )
 
 	local action =
 	{
@@ -449,7 +449,7 @@ void function PlayerProgramsControlPanel( entity panel, entity player, string ha
 			{
 				player.ClearAnimNearZ()
 				player.ClearParent()
-				thread DeActivePathfinder_HandUSB(player)
+				thread SetPathfinder_HandUSB( player )
 
 				// stop any running first person sequences
 				player.Anim_Stop()
@@ -573,7 +573,7 @@ void function PlayerProgramsControlPanel( entity panel, entity player, string ha
 	{
 		thread DataKnifeSuccessSounds( player )
 		Pathfinder_SurveySuccess( panel, player )
-		thread DeActivePathfinder_HandUSB(player)
+		thread SetPathfinder_HandUSB( player )
 	}
 	else
 	{
