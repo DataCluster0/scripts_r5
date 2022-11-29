@@ -229,6 +229,30 @@ void function OnPanelSpawn_Internal( entity panel )
 	#endif
 }
 
+void function ActivePathfinder_HandUSB(entity player)
+{
+	entity firstPersonProxy = player.GetFirstPersonProxy()
+
+	wait 1
+
+	int usbIndex = firstPersonProxy.FindBodygroup( "l_hand_usb" )
+	// show the usb
+	if ( firstPersonProxy.GetBodygroupModelIndex( usbIndex ) == 0 )
+		firstPersonProxy.SetBodygroupModelByIndex( usbIndex, 1 )
+}
+
+void function DeActivePathfinder_HandUSB(entity player)
+{
+	entity firstPersonProxy = player.GetFirstPersonProxy()
+
+	wait 1
+
+	int usbIndex = firstPersonProxy.FindBodygroup( "l_hand_usb" )
+	// hide the usb
+	if ( firstPersonProxy.GetBodygroupModelIndex( usbIndex ) != 0 )
+		firstPersonProxy.SetBodygroupModelByIndex( usbIndex, 0 )
+}
+
 void function PanelUpdateUsability( entity panel )
 {
 	panel.EndSignal( "OnDestroy" )
@@ -355,6 +379,8 @@ void function PlayerProgramsControlPanel( entity panel, entity player, string ha
 
 	// need to wait here so that the panel script can start waiting for the PanelReprogrammed signal.
 	WaitFrame()
+	
+	thread ActivePathfinder_HandUSB(player)
 
 	local action =
 	{
@@ -423,6 +449,7 @@ void function PlayerProgramsControlPanel( entity panel, entity player, string ha
 			{
 				player.ClearAnimNearZ()
 				player.ClearParent()
+				thread DeActivePathfinder_HandUSB(player)
 
 				// stop any running first person sequences
 				player.Anim_Stop()
@@ -546,6 +573,7 @@ void function PlayerProgramsControlPanel( entity panel, entity player, string ha
 	{
 		thread DataKnifeSuccessSounds( player )
 		Pathfinder_SurveySuccess( panel, player )
+		thread DeActivePathfinder_HandUSB(player)
 	}
 	else
 	{
@@ -575,6 +603,7 @@ function ControlPanelFlipAnimation( entity panel, entity player, action, e )
 //				DeleteAnimEvent( panel, "knife_popout" )
 //		}
 //	)
+
 	player.EndSignal( "OnContinousUseStopped" )
 
 	FirstPersonSequenceStruct playerSequence
@@ -589,7 +618,6 @@ function ControlPanelFlipAnimation( entity panel, entity player, action, e )
 	FirstPersonSequenceStruct panelSequence
 	panelSequence.thirdPersonAnim = expect string ( action.panelAnimation3pStart )
 	panelSequence.thirdPersonAnimIdle = expect string ( action.panelAnimation3pIdle )
-
 
 	asset model = DATA_KNIFE_MODEL
 
