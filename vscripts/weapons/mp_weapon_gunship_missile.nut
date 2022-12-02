@@ -45,7 +45,7 @@ var function OnWeaponNpcPrimaryAttack_gunship_missile( entity weapon, WeaponPrim
                     WaitFrame()
 				}
 
-				if ( IsValid( missile ) )
+				if ( IsValid( missile ) && IsValid( weapon ) )
 				{
 					array<entity> entities
                     float radius = weapon.GetWeaponSettingFloat( eWeaponVar.explosionradius )

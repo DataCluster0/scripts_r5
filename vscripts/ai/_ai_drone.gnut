@@ -190,6 +190,7 @@ void function CreateDuckTapeHitBox( entity drone )
 
             proxy.SetOwner( drone )
             proxy.SetParent( drone )
+			SetTeam(proxy, drone.GetTeam() )
 
             proxy.DisableRenderAlways()
             DispatchSpawn( proxy )

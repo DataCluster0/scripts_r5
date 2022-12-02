@@ -131,6 +131,7 @@ void function CreateDuckTapeHitBox( entity gunship )
 
             proxy.SetOwner( gunship )
             proxy.SetParent( gunship )
+			SetTeam(proxy, gunship.GetTeam() )
 
             proxy.DisableRenderAlways()
             DispatchSpawn( proxy )
@@ -142,7 +143,8 @@ void function CreateDuckTapeHitBox( entity gunship )
         }
 
         proxy.SetTakeDamageType( DAMAGE_YES )
-        proxy.SetSmartAmmoLockType( eSmartAmmoLockType.smallType )
+		proxy.SetNoTargetSmartAmmo(true)
+        proxy.SetSmartAmmoLockType( eSmartAmmoLockType.anyType )
     }
 }
 
@@ -157,8 +159,6 @@ void function OnGunshipDamaged( entity gunship_proxy, var damageInfo )
 	int damageSourceId 			= DamageInfo_GetDamageSourceIdentifier( damageInfo )
 	float distance              = Distance( attacker.GetOrigin() , gunship.GetOrigin() )
 
-
-
 	// titan damage range check
     if( IsValid( weapon ) )
 	{
@@ -172,11 +172,11 @@ void function OnGunshipDamaged( entity gunship_proxy, var damageInfo )
 		else
 		    damage = max( damage, far )
 	}
-	
+
 	#if DEVELOPER
 	printl( gunship.GetHealth() + " / " +   gunship.GetMaxHealth() + " | " + distance + " = " + damage)
 	#endif
-   
+
 	//Tried to give visual shield indicator, but it doesn't seem to work?
 	DamageInfo_AddCustomDamageType( damageInfo, DF_SHIELD_DAMAGE )
 

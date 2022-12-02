@@ -654,6 +654,7 @@ Scripts:
 	weapons/cl_smart_ammo.gnut
 	client/objects/cl_drone_medic.nut
 	client/objects/cl_draconis_flyin.nut
+	client/objects/cl_drone.nut
 	client/objects/cl_drone_crypto.nut
 
 	client/rui/cl_weapon_status.gnut

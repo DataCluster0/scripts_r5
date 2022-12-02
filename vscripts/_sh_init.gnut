@@ -369,6 +369,8 @@ void function Client_Init()
 	ClDroneMedic_Init()
 	ClDroneCrypto_Init()
 	ClDraconisFlyin_Init()
+    ClPhantomFighter_Init()
+    ClDrone_Init()
 
 	ClControlPanel_Init()
 	ClSpectre_Init()
