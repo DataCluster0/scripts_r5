@@ -90,6 +90,7 @@ void function SV_CL_Init()
 	MpWeaponFragDrone_Init()
 	ClientSidePickups_Init()
 	GrappleWeaponInit()
+	ProtoBatteryCharger_Init()
 	ShInfoCords_Init()
 
 	#if DEVELOPER
