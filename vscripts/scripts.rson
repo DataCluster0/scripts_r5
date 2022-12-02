@@ -105,7 +105,6 @@ Scripts:
 	mp/sh_music.gnut
 	mp/sh_skydive_trails.gnut
 	sh_weapons.gnut
-  sh_dev_weapons.nut
 	sh_dev_menu.nut
 	sh_weapon_cosmetics.nut
 ]
@@ -465,7 +464,7 @@ Scripts:
 	mp/_titan_tether.gnut
 	_hovertank.gnut
 	_health_regen.gnut
-
+	sh_sdk_tools.nut
 	pilot/_leeching.gnut
 	pilot/_pilot_leeching.gnut
 	pilot/_zipline.gnut

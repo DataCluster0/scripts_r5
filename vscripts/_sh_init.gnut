@@ -97,7 +97,6 @@ void function SV_CL_Init()
 		CaptureMode_Shared_Init()
 	#endif
 
-	ShDevWeapons_Init()
 	MpWeaponMobileHMG_Init()
 	BleedoutShared_Init()
 	ShPakRequests_LevelInit()
@@ -242,6 +241,7 @@ void function Server_Init()
 	MpWeaponRocketLauncher_Init()
 	AiGunship_Init()
 	AiSpawn_Init()
+	ShSdkTools_Init()
 #if NPC_TITAN_PILOT_PROTOTYPE
 	AiPilots_Init()
 #endif

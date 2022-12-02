@@ -508,7 +508,6 @@ void function UICodeCallback_FullyConnected( string levelname )
 		ShDevUtility_Init()
 	#endif
 
-	ShDevWeapons_Init()
 	ShEHI_LevelInit_Begin()
 	ShPakRequests_LevelInit()
 	ShPersistentData_LevelInit_Begin()
