@@ -102,6 +102,7 @@ void function SetupWeapons()
 
 	// Dev
 	//SetupDevCommand( "Dev: Dev Tool", "give mp_weapon_mdlspawner" )
+	SetupDevCommand( "Dev: Arc Tool", "give sp_weapon_arc_tool" )
 	SetupDevCommand( "Dev: Smart Pistol", "give mp_weapon_smart_pistol" )
 	SetupDevCommand( "Dev: Flight Core", "give mp_titanweapon_flightcore_rockets" )
 	SetupDevCommand( "Dev: Sheila", "give mp_weapon_mobile_hmg" )
