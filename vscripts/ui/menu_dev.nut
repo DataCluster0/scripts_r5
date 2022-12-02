@@ -809,6 +809,7 @@ void function SetupHeirloomsDevMenu()
 	SetupDevCommand( "Dataknife Kunai", "script thread SetupHeirloom(true)" )
 	SetupDevCommand( "Boxing Ring Gloves", "script thread SetupHeirloom(false,true)" )
 	SetupDevCommand( "Bolo Sword", "script thread SetupHeirloom()" )
+	SetupDevCommand( "Combat Katana", "script thread SetupHeirloom(false,false,true)" )
 }
 
 void function RunCodeDevCommandByAlias( string alias )

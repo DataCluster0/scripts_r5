@@ -1,0 +1,22 @@
+#base "mp_weapon_melee_survival.txt"
+
+WeaponData
+{
+	// General
+	"printname"   									"Combat_Katana"
+	"shortprintname"								"Combat_Katana"
+	"description" 									"Combat_Katana"
+	"longdesc"										"Combat_Katana"
+
+	"weapon_type_flags"								"WPT_MELEE"
+
+	// Models
+	"viewmodel"   									"mdl/weapons/combat_katana/ptpov_combat_katana.rmdl"
+	"playermodel" 									"mdl/weapons/combat_katana/w_combat_katana.rmdl"
+	
+	"dof_nearDepthStart"							"0.5"
+	"dof_nearDepthEnd"							    "6.4"
+
+	// Behavior
+	"deployfirst_time"								"2.3"
+}

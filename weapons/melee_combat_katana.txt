@@ -1,0 +1,20 @@
+#base "melee_pilot_emptyhanded.txt"
+
+WeaponData
+{
+
+	// General
+	"printname"   								"Melee"
+	"shortprintname"							"Melee"
+	"description" 								"Description needed"
+	"longdesc"									"Description needed"
+
+	"weapon_type_flags"							"WPT_MELEE"
+	
+	// Models
+	"viewmodel"   									"mdl/weapons/combat_katana/ptpov_combat_katana.rmdl"
+	"playermodel" 									"mdl/weapons/combat_katana/w_combat_katana.rmdl"
+
+	// FX
+	"impact_effect_table"							"melee_bolo"
+}
