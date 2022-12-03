@@ -128,6 +128,18 @@ void function SCB_BroadcastFriendlyFireChange( entity playerThatChanged )
 }
 #endif //
 
+entity function CreateRef( vector origin, vector angles )
+{
+	entity ref = CreatePropDynamic( $"mdl/dev/empty_model.rmdl", origin, angles )
+
+	ref.Hide()
+	#if SERVER
+		ref.NotSolid()
+	#endif
+
+	return ref
+}
+
 void function OnEntitiesDidLoad()
 {
 	#if SERVER
@@ -144,6 +156,23 @@ void function OnEntitiesDidLoad()
 		RackGroup r;	r.point = e
 		file.rackSpawns.append(r)
 	}
+
+	//[1113.046] Script(S):rack ref: <30797.0996, -5736.1001, -29164>
+	//[1113.046] Script(S):rack ref: <30801.0996, -6444.1001, -29164>
+	//[1113.047] Script(S):rack ref: <30805.0996, -7144.1001, -29164>
+	//[1113.047] Script(S):rack ref: <30801.0996, -7848.1001, -29164>
+	//[1113.048] Script(S):rack ref: <30789.0996, -5032.1001, -29164>
+
+	entity sniper_ref = CreateRef( <30900.0996, -5032.1001, -29164>, <0,-90,0> )
+	entity explosive_ref = CreateRef( <30810.0996, -5532.1001, -29164>, <0,90,0> )
+
+	RackGroup eref
+	eref.point = explosive_ref
+	file.rackSpawns.append(eref)
+
+	RackGroup sref
+	sref.point = sniper_ref
+	file.rackSpawns.append(sref)
 
 	// Items
 	FillWeaponTable() // load first to know where the rest goes
@@ -339,8 +368,12 @@ void function SpawnOrdnance()
 	const float itemOffsetX = 16.0
 	const float itemOffsetY = 16.0
 	const float itemOffsetZ = 4.0
+	int ammoIndex = 0
 	foreach(RackGroup rackGroup in file.rackSpawns)
 	{
+		if(ammoIndex >= 4)
+		    continue
+
 		entity rack = rackGroup.point
 		vector rght = rack.GetRightVector()
 		vector fwd = rack.GetForwardVector()
@@ -370,6 +403,8 @@ void function SpawnOrdnance()
 				col++
 			}
 		}
+
+		ammoIndex++
 	}
 }
 
@@ -414,8 +449,12 @@ void function SpawnItems()
 	const float cornerOffset = 128.0 - 12.0
 	const float itemOffsetX = 32.0
 	const float itemOffsetY = 24.0
+	int ammoIndex = 0
 	foreach(RackGroup rackGroup in file.rackSpawns)
 	{
+		if(ammoIndex >= 4)
+		    continue
+
 		entity rack = rackGroup.point
 		vector rght = rack.GetRightVector()
 		vector fwd = rack.GetForwardVector()
@@ -440,6 +479,8 @@ void function SpawnItems()
 
 			col++
 		}
+
+		ammoIndex++
 	}
 }
 
@@ -450,8 +491,13 @@ void function SpawnEquipments()
 	const float cornerOffset = 256.0
 	const float itemOffsetX = 32.0
 	const float itemOffsetY = 24.0
+
+	int ammoIndex = 0
 	foreach(RackGroup rackGroup in file.rackSpawns)
 	{
+		if(ammoIndex >= 4)
+		    continue
+
 		entity rack = rackGroup.point
 		vector rght = rack.GetRightVector()
 		vector fwd = rack.GetForwardVector()
@@ -471,6 +517,8 @@ void function SpawnEquipments()
 				thread OnPickupGenericThread(loot, item.ref)
 			}
 		}
+
+		ammoIndex++
 	}
 }
 
@@ -484,7 +532,7 @@ void function SpawnAttachments()
 	{
 		foreach(string ammoType2, array<string> refs in file.attachmentsPerAmmoType)
 		{
-			if(ammoType != ammoType2)
+			if(ammoType != ammoType2 || ammoIndex >= 4)
 				continue
 
 			entity r = file.rackSpawns[ammoIndex].point

@@ -1,8 +1,6 @@
 untyped
 
 global function ProtoBatteryCharger_Init
-global function OnWeaponTossPrep_BatteryCharger
-global function OnWeaponTossReleaseAnimEvent_BatteryCharger
 
 global function OnWeaponActivate_battery_charger
 global function OnWeaponDeactivate_battery_charger
@@ -10,21 +8,17 @@ global function OnWeaponOwnerChanged_battery_charger
 global function OnWeaponChargeBegin_battery_charger
 global function OnWeaponChargeEnd_battery_charger
 global function OnWeaponPrimaryAttack_battery_charger
-
-#if SERVER
-	//global function OnWeaponNpcPrimaryAttack_battery_charger
-	//global function OnWeaponNpcPreAttack_battery_charger
-#endif //SERVER
+global function OnWeaponAttemptOffhandSwitch_battery_charger
 
 const DEBUG_DRAW = false
 const SERVER_EFFECTS = true
 
-const SOUND_CHARGE_BEGIN_1P = "Weapon_BatteryGun_FireStart_1P"
-const SOUND_CHARGE_BEGIN_3P = "Weapon_BatteryGun_FireStart_3P"
-const SOUND_CHARGE_END = "Weapon_BatteryGun_FireStop_1P"
-const SOUND_END_WARNING = "Weapon_BatteryGun_Fire_EndWarning_1P"
+const SOUND_CHARGE_BEGIN_1P = "Wattson_Ultimate_G"
+const SOUND_CHARGE_BEGIN_3P = "Wattson_Ultimate_G"
+const SOUND_CHARGE_END = "lstar_ventcooldown"
+const SOUND_END_WARNING = "lstar_lowammowarning"
 const SOUND_END_WARNING_DURATION = 2.1
-const SOUND_CHARGE_END_DRAINED = "Weapon_BatteryGun_Fire_EnergyDrained_1P"
+const SOUND_CHARGE_END_DRAINED = "LSTAR_ReloadOverheatR5_Pt1"
 
 const BATTERY_CHARGER_SIGNAL_DEACTIVATED = "BatteryChargerDeactivated"
 const BATTERY_CHARGER_SIGNAL_CHARGEEND = "BatteryChargerChargeEnd"
@@ -54,28 +48,17 @@ function ProtoBatteryCharger_Init()
 	PrecacheParticleSystem( $"wpn_laser_beam" )
 	PrecacheParticleSystem( $"hud_ar_line" )
 
-	#if CLIENT
-		//AddDestroyCallback( CHARGE_TOOL, ClientDestroyCallback_BatteryCharger_Stop )
-	#endif
-
-	RegisterSignal( "BatteryChargerStopNPCChargeReset" )
-	RegisterSignal( "BatteryChargerSignalNPCChargeReset" )
 	RegisterSignal( BATTERY_CHARGER_SIGNAL_DEACTIVATED )
 	RegisterSignal( BATTERY_CHARGER_SIGNAL_CHARGEEND )
 }
 
 void function OnWeaponActivate_battery_charger( entity weapon )
 {
-	#if SERVER
-		//thread UpdateArcConnectorHints()
-	#endif
+
 }
 
 void function OnWeaponDeactivate_battery_charger( entity weapon )
 {
-	#if SERVER
-		//thread UpdateArcConnectorHints( true )
-	#endif
 	BatteryCharger_Stop( weapon )
 }
 
@@ -102,6 +85,7 @@ bool function OnWeaponChargeBegin_battery_charger( entity weapon )
 	WeaponPrimaryAttackParams attackParams
 	attackParams.dir = weapon.GetAttackDirection()
 	attackParams.pos = weapon.GetAttackPosition()
+
 	// HACK: this needs a code feature to work with prediction (may be low risk for SP though)
 	thread ChargeBeamThink_BatteryCharger( weapon, attackParams )
 
@@ -132,13 +116,9 @@ void function ArcToolChargeEnd( entity weapon )
 	weapon.StopWeaponSound( SOUND_CHARGE_BEGIN_3P )
 
 	if ( weapon.GetWeaponChargeFraction() >= 1.0 )
-	{
 		weapon.EmitWeaponSound( SOUND_CHARGE_END_DRAINED )
-	}
 	else
-	{
 		weapon.EmitWeaponSound( SOUND_CHARGE_END )
-	}
 
 	#if CLIENT
 		StopSoundOnEntity( weapon, SOUND_END_WARNING )
@@ -148,16 +128,6 @@ void function ArcToolChargeEnd( entity weapon )
 	weapon.StopWeaponEffect( CHARGE_BEAM_EFFECT_GEO, CHARGE_BEAM_EFFECT_GEO )
 	weapon.StopWeaponEffect( CHARGE_BEAM_EFFECT_DUD, CHARGE_BEAM_EFFECT_DUD )
 }
-
-void function OnWeaponTossPrep_BatteryCharger( entity weapon, WeaponTossPrepParams tossPrepParams )
-{
-}
-
-var function OnWeaponTossReleaseAnimEvent_BatteryCharger( entity weapon, WeaponPrimaryAttackParams attackParams )
-{
-
-}
-
 
 var function OnWeaponPrimaryAttack_battery_charger( entity weapon, WeaponPrimaryAttackParams attackParams )
 {
@@ -171,113 +141,10 @@ var function OnWeaponPrimaryAttack_battery_charger( entity weapon, WeaponPrimary
 	return 1
 }
 
-#if SERVER
-var function OnWeaponNpcPrimaryAttack_battery_charger( entity weapon, WeaponPrimaryAttackParams attackParams )
-{
-	thread NPCFireArcToolOnce( weapon, attackParams )
-	return 1
-}
-
-void function NPCFireArcToolOnce( entity weapon, WeaponPrimaryAttackParams attackParams )
-{
-	thread ChargeBeamThink_BatteryCharger( weapon, attackParams, false )
-	wait 0.8
-	if ( IsValid( weapon ) )
-		ArcToolChargeEnd( weapon )
-}
-#endif
-
 void function BatteryCharger_Stop( weapon )
 {
 	weapon.Signal( BATTERY_CHARGER_SIGNAL_DEACTIVATED )
 }
-
-#if SERVER
-void function OnWeaponNpcPreAttack_battery_charger( entity weapon )
-{
-	thread DoNPCPreAttackFX( weapon )
-}
-
-void function DoNPCPreAttackFX( entity weapon )
-{
-	weapon.EndSignal( "OnDestroy" )
-	entity weaponOwner = weapon.GetWeaponOwner()
-	weaponOwner.EndSignal( "OnDestroy" )
-
-	thread BatteryChargerNPCChargeReset( weaponOwner, weapon )
-}
-
-void function BatteryChargerNPCChargeReset( entity weaponOwner, entity weapon )
-{
-	if ( !IsAlive( weaponOwner ) )
-		return
-
-	weaponOwner.EndSignal( "OnDeath" )
-	weaponOwner.EndSignal( "OnDestroy" )
-	weaponOwner.EndSignal( "BatteryChargerStopNPCChargeReset" )
-	thread StopNPCWeaponEffect( weaponOwner, weapon )
-
-	OnThreadEnd(
-		function() : ( weaponOwner )
-		{
-			if ( IsValid( weaponOwner ) )
-			{
-				weaponOwner.Signal( "BatteryChargerSignalNPCChargeReset" )
-			}
-		}
-	)
-
-	wait 1.5 //charge time for NPC
-}
-
-function StopNPCWeaponEffect( weaponOwner, weapon )
-{
-	WaitSignal( weaponOwner, "OnDeath", "BatteryChargerStopNPCChargeReset", "BatteryChargerSignalNPCChargeReset" )
-
-	if ( !IsValid( weapon ) )
-		return
-}
-/*
-void function GunGetsSmallChargeFromSwitch( entity weapon )
-{
-	if ( !IsValid( weapon ) )
-		return
-	entity owner = weapon.GetWeaponOwner()
-	if ( !IsValid( owner ) || !IsAlive( owner ) )
-		return
-
-	EndSignal( weapon, BATTERY_CHARGER_SIGNAL_CHARGEEND )
-	EndSignal( owner, "OnDeath" )
-	EndSignal( owner, "OnDestroy" )
-
-	while( IsValid( weapon ) && IsValid( owner ) )
-	{
-		WaitSignal( owner, "ActivatedArcSwitch" )
-		float fraction = weapon.GetWeaponChargeFraction()
-		fraction = max( fraction - 0.2, 0.0 )
-		weapon.SetWeaponChargeFraction( fraction )
-	}
-}
-*/
-#endif // SERVER
-
-#if CLIENT
-void function ClientDestroyCallback_BatteryCharger_Stop( entity ent )
-{
-	BatteryCharger_Stop( ent )
-}
-
-// hacky (temp I hope) fix for starting and stopping an effect on the same frame not actually stopping the effect.
-void function HACK_EffectStopNextFrame( int handle, bool doRemoveAllParticlesNow, bool doPlayEndCap )
-{
-	WaitFrame()
-	if ( EffectDoesExist( handle ) )
-	{
-		printt( "stop beem effect a frame later", handle )
-		EffectStop( handle, doRemoveAllParticlesNow, doPlayEndCap )
-	}
-}
-#endif // CLIENT
 
 void function ChargeBeamThink_BatteryCharger( entity weapon, WeaponPrimaryAttackParams attackParams, bool playerFired = true )
 {
@@ -294,6 +161,7 @@ void function ChargeBeamThink_BatteryCharger( entity weapon, WeaponPrimaryAttack
 			}
 		}
 	)
+
 	EndSignal( weapon, BATTERY_CHARGER_SIGNAL_CHARGEEND )
 
 	//wait 0.15 // so a little charge doesn't play at start
@@ -375,15 +243,12 @@ void function ChargeBeamThink_BatteryCharger( entity weapon, WeaponPrimaryAttack
 				int oldHandle = expect int( e.handle )
 				e.handle = weapon.PlayWeaponEffectReturnViewEffectHandle( beamTarget.effectToPlay, $"", "muzzle_flash" )
 				if ( EffectDoesExist( oldHandle ) )
-				{
 					EffectStop( oldHandle, true, false )
-				}
 			}
 			lastEffectToPlay = beamTarget.effectToPlay
 
 			if ( EffectDoesExist( e.handle ) )
 				EffectSetControlPointVector( e.handle, 1, beamTarget.hitPos )
-
 		#endif // CLIENT
 
 		#if SERVER
@@ -405,7 +270,7 @@ void function ChargeBeamThink_BatteryCharger( entity weapon, WeaponPrimaryAttack
 				if ( IsValid( beamTarget.target ) && beamTarget.target != weapon.GetWeaponOwner() )
 				{
 					entity owner = weapon.GetWeaponOwner()
-					beamTarget.target.TakeDamage( weapon.GetWeaponSettingInt( eWeaponVar.damage_far_value ), owner, owner, { origin = owner.GetOrigin(), force = <0,0,0>, scriptType = DF_INSTANT | DF_ELECTRICAL | DF_DISSOLVE, weapon = weapon, damageSourceId = eDamageSourceId.mp_weapon_defender } )
+					beamTarget.target.TakeDamage( weapon.GetWeaponSettingInt( eWeaponVar.damage_far_value ), owner, owner, { origin = owner.GetOrigin(), force = <0,0,0>, scriptType = DF_INSTANT | DF_ELECTRICAL | DF_DISSOLVE, weapon = weapon, damageSourceId = eDamageSourceId.deathField } )
 				}
 			}
 
@@ -454,6 +319,7 @@ BeamTarget function GetBeamTarget( entity weapon, WeaponPrimaryAttackParams atta
 		array<entity> ignoredEntities = [ owner, weapon ]
 		int traceMask 			= TRACE_MASK_SHOT
 		int flags					= VIS_CONE_ENTS_IGNORE_VORTEX
+
 		entity antilagPlayer		= null
 		if ( owner.IsPlayer() )
 			antilagPlayer = owner
@@ -495,7 +361,8 @@ BeamTarget function GetBeamTarget( entity weapon, WeaponPrimaryAttackParams atta
 
 	// If we didn't find an entity target then just do a trace forward
 	entity player = weapon.GetWeaponOwner()
-	vector traceStartPos = player.EyePosition()
+	vector forward = player.GetForwardVector()
+	vector traceStartPos = player.EyePosition() + (forward * 60)
 	vector traceEndPos = traceStartPos + ( weaponVec * MAX_BEAM_DISTANCE )
 	TraceResults traceResults = TraceLineHighDetail( traceStartPos, traceEndPos, weapon, (TRACE_MASK_SHOT | TRACE_MASK_BLOCKLOS), TRACE_COLLISION_GROUP_NONE )
 
@@ -539,3 +406,27 @@ entity function CreateServerBeamWithControlPoint( entity weapon, asset effect, v
 	return beamSystem
 }
 #endif //SERVER
+
+bool function OnWeaponAttemptOffhandSwitch_battery_charger( entity weapon )
+{
+	//
+	entity ownerPlayer = weapon.GetWeaponOwner()
+	Assert( ownerPlayer.IsPlayer() )
+
+	//
+	if ( Bleedout_IsBleedingOut( ownerPlayer ) )
+		return false
+
+	entity player = weapon.GetWeaponOwner()
+	if ( player.IsPhaseShifted() )
+		return false
+
+	//
+	if ( player.IsZiplining() )
+		return false
+
+	if ( weapon == ownerPlayer.GetActiveWeapon( eActiveInventorySlot.mainHand ) )
+		return true //
+
+	return true
+}
