@@ -49,8 +49,8 @@ WeaponData
 	"stat_rof"										"15"
 
 	// Models
-	"viewmodel"   									"mdl/weapons/output/ptpov_arc_tool.rmdl"
-	"playermodel" 									"mdl/weapons/w_arc_tool.rmdl"
+	"viewmodel"   									"mdl/weapons/sp_arc_tool/ptpov_arc_tool.rmdl"
+	"playermodel" 									"mdl/weapons/sp_arc_tool/w_arc_tool.rmdl"
 
 	"sound_dryfire"   								"titan_dryfire"
 	"npc_reload_enabled"  							"0"
