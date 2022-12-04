@@ -495,7 +495,7 @@ BeamTarget function GetBeamTarget( entity weapon, WeaponPrimaryAttackParams atta
 
 	// If we didn't find an entity target then just do a trace forward
 	entity player = weapon.GetWeaponOwner()
-	vector traceStartPos = player.EyePosition()
+	vector traceStartPos = player.EyePosition() + <0,-22,0>
 	vector traceEndPos = traceStartPos + ( weaponVec * MAX_BEAM_DISTANCE )
 	TraceResults traceResults = TraceLineHighDetail( traceStartPos, traceEndPos, weapon, (TRACE_MASK_SHOT | TRACE_MASK_BLOCKLOS), TRACE_COLLISION_GROUP_NONE )
 
