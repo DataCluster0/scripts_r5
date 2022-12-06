@@ -134,8 +134,8 @@ void function LoadCommsActionsFromDatatable()
 void function RegisterCustomComs()
 {
 	// ammo
-	RegisterCustomCom( eCommsAction.PING_AMMO_SNIPER,           "ping_foundAmmo")
-	RegisterCustomCom( eCommsAction.INVENTORY_NEED_AMMO_SNIPER, "ping_needAmmo")
+	RegisterCustomCom( eCommsAction.PING_AMMO_SNIPER,           "ping_foundAmmoSniper")
+	RegisterCustomCom( eCommsAction.INVENTORY_NEED_AMMO_SNIPER, "needAmmoSniper")
 	RegisterCustomCom( eCommsAction.PING_AMMO_EXPLOSIVE,            "ping_foundAmmoExp")
 	RegisterCustomCom( eCommsAction.INVENTORY_NEED_AMMO_EXPLOSIVE,  "ping_needAmmoExp")
 
@@ -148,10 +148,10 @@ void function RegisterCustomComs()
 	RegisterCustomCom( eCommsAction.PING_WEAPON_SOFTBALL,      "ping_foundSoftball")
 	RegisterCustomCom( eCommsAction.PING_WEAPON_EPG,           "ping_foundEpg")
 	RegisterCustomCom( eCommsAction.PING_WEAPON_SMR,           "ping_foundRocketLauncher")
-	RegisterCustomCom( eCommsAction.PING_WEAPON_SHEILA_HMG,    "ping_foundLMG")
+	RegisterCustomCom( eCommsAction.PING_WEAPON_SHEILA_HMG,    "ping_turret")
 	RegisterCustomCom( eCommsAction.PING_WEAPON_WINGMAN_ELITE, "ping_foundWingman")
 	RegisterCustomCom( eCommsAction.PING_WEAPON_SMART_PISTOL,  "ping_foundPistol")
-	RegisterCustomCom( eCommsAction.PING_WEAPON_SENTINEL,      "ping_foundSniper")
+	RegisterCustomCom( eCommsAction.PING_WEAPON_SENTINEL,      "ping_foundSentinel")
 	RegisterCustomCom( eCommsAction.PING_WEAPON_THROWINGKNIFE, "ping_foundWeapon")
 
     // npcs
