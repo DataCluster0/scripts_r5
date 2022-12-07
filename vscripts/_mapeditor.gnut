@@ -316,25 +316,27 @@ entity function SetNodeRopeProperties( entity rope )
 	return rope
 }
 
-void function MapEditor_CreateLinkedZipline( array<vector> nodes )
+array<entity> function MapEditor_CreateLinkedZipline( array<vector> nodes )
 {
-	array<entity> ropes = [ SetNodeRopeProperties( CreateEntity( "move_rope" ) ) ]
-	ropes[0].SetOrigin( nodes[0] )
+    array<entity> ropes = [ SetNodeRopeProperties( CreateEntity( "move_rope" ) ) ]
+    ropes[0].SetOrigin( nodes[0] )
 
-	// create child ropes
-	for(int i = 1; i < nodes.len(); i++) {
-		vector nodepos = nodes[i]
-		ropes.append( SetNodeRopeProperties( CreateEntity( "keyframe_rope" )  ) )
+    // create child ropes
+    for(int i = 1; i < nodes.len(); i++) {
+        vector nodepos = nodes[i]
+        ropes.append( SetNodeRopeProperties( CreateEntity( "keyframe_rope" )  ) )
         
-		ropes[i].SetOrigin( nodepos )
-	}
+        ropes[i].SetOrigin( nodepos )
+    }
 
     // link all nodes
-	for(int i = 0; i < ropes.len(); i++) {
-		if(i + 1 < ropes.len())
-			ropes[i].LinkToEnt( ropes[i + 1]  )
-	}
+    for(int i = 0; i < ropes.len(); i++) {
+        if(i + 1 < ropes.len())
+            ropes[i].LinkToEnt( ropes[i + 1]  )
+    }
 
-	foreach(entity rope in ropes)
+    foreach(entity rope in ropes)
         DispatchSpawn( rope )
+
+    return ropes
 }
