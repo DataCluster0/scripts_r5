@@ -123,8 +123,8 @@ WeaponData
 	"damage_far_value"								"55"
 	"damage_near_distance"							"1500"
 	"damage_far_distance" 							"2000"
-	"damage_near_value_titanarmor"					"300"
-	"damage_far_value_titanarmor" 					"250"
+	"damage_near_value_titanarmor"					"65"
+	"damage_far_value_titanarmor" 					"65"
 	"damage_rodeo" 									"350"
 
    	"damage_very_far_value"							"35"
@@ -160,7 +160,6 @@ WeaponData
 	"proficiency_good_spreadscale"					"1.66667"
 	"proficiency_very_good_spreadscale"   			"1.66667"
 
-	"viewmodel_offset_ads"							"0 0 0"
 	"dof_zoom_nearDepthStart"						"4.750"
 	"dof_zoom_nearDepthEnd"							"11.000"
 	"dof_nearDepthStart"							"3.683"
@@ -361,20 +360,6 @@ WeaponData
 	"holster_type"									"pistol"
 
 	// Bodygroups:
-	"bodygroup1_name"	"suppressor_cyl_sm"
-	"bodygroup1_set"	"0"
-	"bodygroup2_name"	"suppressor_sq_sm"
-	"bodygroup2_set"	"0"
-    "bodygroup3_name"	"sight_cqh"
-	"bodygroup3_set"	"0"
-	"bodygroup4_name"	"sight_acgs"
-	"bodygroup4_set"	"0"
-	"bodygroup5_name"	"sight_cro"
-	"bodygroup5_set"	"0"
-	"bodygroup6_name"	"proscreen"
-	"bodygroup6_set"	"0"
-
-
     "clip_bodygroup"						"b3wing_magazine"
     "clip_bodygroup_index_shown"			"0"
     "clip_bodygroup_index_hidden"			"1"
@@ -382,9 +367,16 @@ WeaponData
     "clip_bodygroup_show_for_milestone_1"	"0"
     "clip_bodygroup_show_for_milestone_2"	"1"
     "clip_bodygroup_show_for_milestone_3"	"1"
-
+	"bodygroup6_name"	"proscreen"
+	"bodygroup6_set"	"0"
 	Mods
 	{
+		pro_screen
+		{
+			"ui8_enable"		"1"
+			"bodygroup6_set"	"1"
+		}
+
 	    gold
 	    {
 	    }
@@ -399,8 +391,7 @@ WeaponData
 
 	   		"uses_ammo_pool"				"1"
         }
-		
-		silencer //HACK JFS: Doesn't get applied on amped weapons. See bug 170460
+        silencer //HACK JFS: Doesn't get applied on amped weapons. See bug 170460
 		{
 			"silenced"							"1"
 			"fire_sound_2_player_1p"			"Weapon_Wingman_FireSuppressed_1P"
@@ -409,7 +400,7 @@ WeaponData
 			"damage_near_value"   				"--10"
 			"damage_far_value"					"--10"
 			"damage_very_far_value"				"--10"
-			"bodygroup2_set"					"1"
+            "bodygroup2_set" "1"
 
 			//"rumble"  						"4"
 			"tracer_effect"   					"P_wpn_tracer_pistol"
@@ -419,104 +410,54 @@ WeaponData
 			"fx_muzzle_flash_world"				"wpn_muzzleflash_pistol_sup"
 			"fx_muzzle_flash_attach"			"muzzle_flash_suppressor_sq"
 		}
-		
-		hcog
-		{
-			"bodygroup3_set"	"1"
-			"bodygroup4_set"	"0"
-			"bodygroup5_set"	"0"
-			"viewmodel_offset_ads"							"0 -6.7 -0.75"
-			"zoom_fov"										"35"
-			"anim_alt_idleAttack"	"1"
-
-			"dof_zoom_nearDepthStart"						"6.161"
-			"dof_zoom_nearDepthEnd"							"9.204"
-		}
-		redline_sight
-		{
-			"bodygroup3_set"	"0"
-			"bodygroup4_set"	"1"
-			"bodygroup5_set"	"0"
-			"viewmodel_offset_ads"							"0 -9 -0.78"
-			"dof_zoom_nearDepthStart"						"4.491"
-			"dof_zoom_nearDepthEnd"							"5.545"
-		}
-		
-		threat_scope
-		{
-			"bodygroup3_set"	"0"
-			"bodygroup4_set"	"0"
-			"bodygroup5_set"	"1"
-			"threat_scope_enabled"			"1"
-			"threat_scope_bounds_tagname1"	"SCR_TR_CRO"
-			"threat_scope_bounds_tagname2"	"SCR_BL_CRO"
-			"viewmodel_offset_ads"							"0 -9 -0.78"
-			"dof_zoom_nearDepthStart"						"4.491"
-			"dof_zoom_nearDepthEnd"							"5.545"
-		}
-		pro_screen
-		{
-			"ui8_enable"		"1"
-			"bodygroup6_set"	"1"
-		}
-
-		burn_mod_wingman_n
-		{
-			//FX
-			"tracer_effect"   								"P_wpn_tracer_BC"
-			"tracer_effect_first_person"                    "P_wpn_tracer_BC"
-			"fx_muzzle_flash_view"							"wpn_muzzleflash_pistol_elec_FP"
-			"fx_muzzle_flash_world"							"wpn_muzzleflash_pistol_elec"
-			"projectile_trail_effect_0" 					"weapon_kraber_projectile_burn"
-			"impact_effect_table"		 					"titan_bullet_elec"
-
-			"is_burn_mod"		"1"
-
-			"damage_near_value"   							"++20"
-			"damage_far_value"								"++20"
-   	 		"damage_very_far_value"							"++20"
-			"damage_near_value_titanarmor"					"450"
-			"damage_far_value_titanarmor" 					"400"
-		}
+        hopup_headshot_dmg
+        {
+        	"damage_headshot_scale"			"2.25"
+        	"projectile_trail_effect_0"     "P_tracer_proj_sniper_piercer"
+        	"fire_sound_1_player_1p"		"weapon_wingman_fire_skull_1p"
+			"fire_sound_1_player_3p"		"weapon_wingman_fire_skull_3p"
+			"fire_sound_1_npc"				"weapon_wingman_fire_skull_3p"
+        }
 
         highcal_mag_l1
 		{
 			"ammo_clip_size"   							"6"
 		}
-		
 		highcal_mag_l2
 		{
 			"ammo_clip_size"   							"8"
 		}
-		
 		highcal_mag_l3
 		{
 			"ammo_clip_size"   							"10"
 		}
 	}
 
+	"viewmodel_offset_ads"							"0 0 -0.3"
+
 	"ui1_enable"		"1"
+	"ui1_draw_cloaked"	"1"
 	UiData1
 	{
+		"ui"							"ui/wingman_rui_upper"
+		"mesh"							"models/weapons/attachments/re45_rui_upper"
+		Args
+		{
+			vis							player_zoomfrac
+		}
+	}
+
+	"ui2_enable"		"1"
+	"ui2_draw_cloaked"	"1"
+	UiData2
+	{
 		"ui"							"ui/wingman_rui_lower"
-		"mesh"					"models/weapons/attachments/b3wing_rui_lower"
+		"mesh"							"models/weapons/attachments/b3wing_rui_lower"
 		Args
 		{
 			vis							player_zoomfrac
 			ammo						weapon_ammo
 			clipSize					weapon_clipSize
-		}
-	}
-
-	"ui6_enable"		"1"
-	"ui6_draw_cloaked"	"1"
-	UiData6
-	{
-		"ui"								"ui/r97_reticle"
-		"mesh"							"models/weapons/attachments/r97_rui_upper"
-		Args
-		{
-			vis							player_zoomfrac
 		}
 	}
 
@@ -551,8 +492,8 @@ WeaponData
 
 		Crosshair_1
 		{
-			"ui"						"ui/crosshair_plus"
-			"base_spread"				"0"
+			"ui"						"ui/crosshair_plus_dot"
+			"base_spread"				"100"
 			Args
 			{
 				isFiring				weapon_is_firing
