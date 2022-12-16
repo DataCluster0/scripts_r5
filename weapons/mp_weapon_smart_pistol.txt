@@ -40,8 +40,8 @@ WeaponData
 	"stat_rof"										"45"
 
 	// Models
-	"viewmodel"   									"mdl/weapons/p2011/ptpov_p2011.rmdl"
-	"playermodel" 									"mdl/weapons/p2011/w_p2011.rmdl"
+	"viewmodel"   									"mdl/weapons/p2011sp/ptpov_p2011sp.rmdl"
+	"playermodel" 									"mdl/weapons/p2011sp/w_p2011sp.rmdl"
 	"activitymodifier"								"pistol"
 	"holster_type"									"pistol"
 
@@ -376,6 +376,8 @@ WeaponData
 	"smart_ammo_npc_targets_must_be_tracked"		"0"
 	"smart_ammo_tracker_status_effects"				"1"
 	"smart_ammo_tracked_targets_check_visibility"	"1"
+	
+	"viewmodel_ads_centerpoint_attachment"      	"sight_on"
 
 	//Bodygroups:
 	"bodygroup1_name"	"suppressor_cyl_sm"
@@ -560,8 +562,8 @@ WeaponData
 	"ui1_enable"		"1"
 	UiData1
 	{
-		"ui"								"ui/p2011_green_sights"
-		"mesh"							"models/weapons/attachments/p2011_rui_upper"
+		"ui"								"ui/diamond_reticle_rear"
+		"mesh"							"models/weapons/attachments/mk6_rui_upper"
 		Args
 		{
 			vis							player_zoomfrac
@@ -571,8 +573,8 @@ WeaponData
 	"ui2_enable"		"1"
 	UiData2
 	{
-		"ui"								"ui/p2011_ammo_counter"
-		"mesh"							"models/weapons/attachments/p2011_rui_lower"
+		"ui"								"ui/mk6_ammo_counter"
+		"mesh"							"models/weapons/attachments/mk6_rui_lower"
 		Args
 		{
 			vis							player_zoomfrac
