@@ -562,15 +562,15 @@ WeaponData
 	"ui1_enable"		"1"
 	UiData1
 	{
-		"ui"							"ui/p2011_green_sights"
-		"mesh"							"models/weapons/attachments/mk6_rui_upper"
+		"ui"							"ui/diamond_reticle_rear"
+		"mesh"							"models/weapons/attachments/diamond_reticle_rear"
 		Args
 		{
 			vis							player_zoomfrac
 			ammo						weapon_ammo
 			clipSize					weapon_clipSize
 			clipCount					weapon_ammoClipCount
-		}
+        }
 	}
 
 	"ui2_enable"		"1"
