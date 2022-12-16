@@ -35,6 +35,7 @@ void function Precache_Sdk_Weapons()
 	PrecacheWeapon( $"mp_weapon_softball" )
 	PrecacheWeapon( $"mp_weapon_sentinel" )
 	PrecacheWeapon( $"mp_weapon_volt_smg" )
+	PrecacheWeapon( $"mp_weapon_car" )
 	//////////////////////////////////////////////////
 	PrecacheWeapon( $"mp_weapon_defender_sustained" )
 	PrecacheWeapon( $"weapon_cubemap" )
@@ -63,7 +64,6 @@ void function Precache_Sdk_Weapons()
 	PrecacheWeapon( $"sp_weapon_arc_tool" )//TEMP
 	PrecacheWeapon( $"mp_ability_3dash" )
 	//PrecacheWeapon( $"mp_weapon_3030" )//Disabled til we get original models
-	//PrecacheWeapon( $"mp_weapon_car" )
 	//PrecacheWeapon( $"mp_weapon_dragon_lmg" )
 }
 
