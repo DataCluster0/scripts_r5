@@ -58,12 +58,12 @@ void function SetupWeapons()
 	SetupDevCommand( "Rifle: Hemlok", "give mp_weapon_hemlok" )
 	SetupDevCommand( "Rifle: R-301", "give mp_weapon_rspn101" )
 
-
 	// SMGs
 	SetupDevCommand( "SMG: Alternator", "give mp_weapon_alternator_smg" )
 	SetupDevCommand( "SMG: Prowler", "give mp_weapon_pdw" )
 	SetupDevCommand( "SMG: R-99", "give mp_weapon_r97" )
 	SetupDevCommand( "SMG: Volt SMG", "give mp_weapon_volt_smg" )
+	SetupDevCommand( "SMG: Car SMG", "give mp_weapon_car" )
 
 	// LMGs
 	SetupDevCommand( "LMG: Devotion", "give mp_weapon_esaw" )
