@@ -343,64 +343,6 @@ WeaponData
 			"uses_ammo_pool"				"1"
         }
 
-		holosight
-		{
-			"bodygroup1_set"	    "0"
-			"bodygroup2_set"	    "0"
-			"bodygroup3_set"	    "0"
-			"bodygroup4_set"	    "1"
-			//"anim_alt_idleAttack"   "2"
-
-			"dof_zoom_nearDepthStart"						"6.161"
-			"dof_zoom_nearDepthEnd"							"9.204"
-			"viewmodel_offset_ads"							"0 2.3 -0.7"
-			"ui1_enable"		"0"
-			"ui7_enable"		"1"
-			dof_zoom_focusArea_horizontal					0.062
-			dof_zoom_focusArea_top							0.10
-			dof_zoom_focusArea_bottom						-0.040
-		}
-		
-		redline_sight
-		{
-			"ui1_enable"		"0"
-			"ui3_enable"		"1"
-
-			"bodygroup1_set"	    "0"
-			"bodygroup2_set"	    "1"
-			"bodygroup3_set"	    "0"
-			"bodygroup4_set"	    "0"
-			"dof_zoom_nearDepthStart"						"5.691"
-			"dof_zoom_nearDepthEnd"							"6.745"
-			"viewmodel_offset_ads"							"0 0.9 -.07"
-
-			"zoom_fov"						"25"
-			dof_zoom_focusArea_horizontal					0.085
-			dof_zoom_focusArea_top							0.080
-			dof_zoom_focusArea_bottom						-0.047
-		}
-		
-		threat_scope
-		{
-			"bodygroup1_set"	    "0"
-			"bodygroup2_set"	    "0"
-			"bodygroup3_set"	    "1"
-			"bodygroup4_set"	    "0"
-			"ui1_enable"		"0"
-			"ui4_enable"		"1"
-
-			"dof_zoom_nearDepthStart"						"5.040"
-			"dof_zoom_nearDepthEnd"							"5.737"
-			"viewmodel_offset_ads"							"0 -.3 -.11"
-
-			"threat_scope_enabled"			"1"
-			"threat_scope_bounds_tagname1"	"SCR_TR_CRO"
-			"threat_scope_bounds_tagname2"	"SCR_BL_CRO"
-			dof_zoom_focusArea_horizontal					0.068
-			dof_zoom_focusArea_top							0.065
-			dof_zoom_focusArea_bottom						-0.046
-		}
-
 		pro_screen
 		{
 			"ui8_enable"		"1"
@@ -448,48 +390,6 @@ WeaponData
 			ammo						weapon_ammo
 			clipSize					weapon_clipSize
 			clipCount					weapon_ammoClipCount
-		}
-	}
-	
-	"ui3_enable"		"0"
-	"ui3_draw_cloaked"	"1"
-	UiData3
-	{
-		"ui"							"ui/crosshair_plus"
-		"mesh"							"models/weapons/attachments/acgs_rui_upper"
-		Args
-		{
-			vis							player_zoomfrac
-			ammo						weapon_ammo
-			clipSize					weapon_clipSize
-		}
-	}
-
-	"ui4_enable"		"0"
-	"ui4_draw_cloaked"	"1"
-	UiData4
-	{
-		"ui"							"ui/crosshair_plus"
-		"mesh"							"models/weapons/attachments/cro_rui_upper"
-		Args
-		{
-			zoomFrac					player_zoomfrac
-			ammo						weapon_ammo
-			clipSize					weapon_clipSize
-		}
-	}
-
-	"ui7_enable"		"0"
-	"ui7_draw_cloaked"	"1"
-	UiData7
-	{
-		"ui"							"ui/crosshair_plus"
-		"mesh"							"models/weapons/attachments/holo_rui_upper"
-		Args
-		{
-			vis							player_zoomfrac
-			ammo						weapon_ammo
-			clipSize					weapon_clipSize
 		}
 	}
 
