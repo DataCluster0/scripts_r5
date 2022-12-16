@@ -51,6 +51,9 @@ void function Desertlands_PreMapInit_Common()
 
 void function Desertlands_MapInit_Common()
 {
+	if ( GetMapName() == "mp_rr_desertlands_mu3" )
+		return
+
 	printt( "Desertlands_MapInit_Common" )
 
 	MapZones_RegisterDataTable( $"datatable/map_zones/zones_mp_rr_desertlands_64k_x_64k.rpak" )
